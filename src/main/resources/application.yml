@@ -1,0 +1,146 @@
+# https://www.springcloud.io/post/2022-05/springboot-3-0/#multi-document-yaml
+
+# Shared profile ====================================================================================
+# Logging configuration
+logging:
+  level:
+    org.hibernate.orm.connections.pooling: ERROR
+    org.hibernate.engine.jdbc.connections.internal: ERROR
+    com.zaxxer.hikari: ERROR 
+    org:
+      hibernate:
+        SQL: INFO
+        type: INFO
+      springframework:
+        security: INFO
+
+
+password:
+  validation:
+    needs-mixed-case: true
+    minimum-length: 7
+    maximum-length: 21
+    needs-special-characters: true
+    needs-numbers: true
+    needs-letters: true
+
+first-name:
+  validation:
+    minimum-length: 2
+    maximum-length: 32
+
+jwt:
+  life-in-milliseconds: 6000000
+
+username:
+  validation:
+    minimum-length: 3
+    maximum-length: 32
+
+last-name:
+  validation:
+    minimum-length: 2
+    maximum-length: 256
+    
+location:
+  name:
+    validation:
+      minimum-length: 2
+      maximum-length: 32
+  instruction:
+    validation:
+      minimum-length: 0
+      maximum-length: 4096
+
+---
+
+# EN PROFILE =======================================================================================
+
+superadmin:
+  allow-restart: true
+
+#email:
+#  disabled: false
+#  do-not-reply: no.reply@the-pledge.org
+#  host: smtp.mailgun.org
+#  port: 587
+#  protocol: smtp
+#  username: postmaster@sandbox1c04b52f278040d8a5af14e185b18e81.mailgun.org
+#  password: 905dd89a55ef40ba25ef104eaed503b8-7a3af442-a6d602a4
+jwt:
+  life-in-milliseconds: 3600000
+
+
+spring:
+  config:
+    activate:
+      on-profile: "en"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/greenzonedev
+    username: postgres
+    password: eli123
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 600000  # Added idle timeout
+      max-lifetime: 1800000  # Added max connection lifetime
+      pool-name: GreenZoneHikariPool  # Added named pool for easier monitoring
+      connection-test-query: SELECT 1  # Added connection validation query
+
+  jpa:
+    open-in-view: false 
+    hibernate:
+      ddl-auto: update 
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        generate_statistics: true  # Optional: for performance monitoring
+        jdbc:
+          batch_size: 20  # Optional: for batch insert optimization
+        order_inserts: true
+        order_updates: true
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+
+  sql:
+    init:
+      data-locations: 
+        - classpath:sql/standing_data.sql
+        - classpath:sql/other_data_en.sql
+      mode: always
+
+# Optional: Add more detailed error handling
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: ON_PARAM
+
+web:
+  server:
+    port: 3001
+    protocol: http
+    domain: localhost
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 
+          - health
+          - info
+          - metrics
+          - prometheus
+  endpoint:
+    health:
+      show-details: always
+
+---
