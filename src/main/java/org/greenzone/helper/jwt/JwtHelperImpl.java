@@ -39,6 +39,7 @@ import org.greenzone.repository.token.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -49,6 +50,7 @@ import io.jsonwebtoken.security.Keys;
 /**
  * @author EN - Dec 15, 2024
  */
+@Component
 public class JwtHelperImpl implements JwtHelper {
 
     @Value( "${jwt.life-in-milliseconds}" )
