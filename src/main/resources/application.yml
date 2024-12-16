@@ -59,17 +59,19 @@ location:
 superadmin:
   allow-restart: true
 
-#email:
-#  disabled: false
-#  do-not-reply: no.reply@the-pledge.org
-#  host: smtp.mailgun.org
-#  port: 587
-#  protocol: smtp
-#  username: postmaster@sandbox1c04b52f278040d8a5af14e185b18e81.mailgun.org
-#  password: 905dd89a55ef40ba25ef104eaed503b8-7a3af442-a6d602a4
+email:
+  disabled: false
+  do-not-reply: no.reply@green-zone.org
+  host: sandbox.smtp.mailtrap.io
+  tls: no
+  ssl: yes
+  port: 587
+  protocol: smtp
+  username: 9abc6f55dcbbca
+  password: af53524090bdbe
+
 jwt:
   life-in-milliseconds: 3600000
-
 
 spring:
   config:
