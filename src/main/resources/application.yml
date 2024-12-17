@@ -56,9 +56,6 @@ logging:
       hibernate:
         SQL: INFO
         type: INFO
-        orm:
-          jdbc:
-            bind: TRACE
       springframework:
         security: INFO
 
