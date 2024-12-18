@@ -93,7 +93,7 @@ public class SendActivationLinkEmailHelperImpl extends AbstractEmailHelper
 
         String templateName = "sendClientActivationLink.tfl";
         EmailSentResponse emailSentResponse;
-        String subject = "Activation of In My Steps Account";
+        String subject = "Activation of GreenZone Account!";
         String emailActivationCode = user.getEmailActivationCode();
 
         String activationLink = buildActivationLink( emailActivationCode );

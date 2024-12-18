@@ -9,69 +9,70 @@
         </style>
     </head>
     <body>
-        <div style="background: white; border: solid 5px white; padding: 3px">
-            <table width="95%">
-                <tbody>
-                    <tr>
-                        <td>
-                            Dear ${firstName},
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br/>
-                            Click on the Link to activate your "Greenzone" Account:
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br/>
-                            <a href="${activationLink}">${activationLink}</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br/>
-                            This email was sent to you to prove to us that you own the email account
-                            you registered with.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br/>
-                            Thank you
-                            <br/><br/>
-                            ${company}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <br/>
-                            <br/>
-                            <table cellspacing="1" cellpadding="1">
-                                <tr>
-                                    <td>Email:</td>
-                                    <td>${email}</td>
-                                </tr>
-                                <tr>
-                                    <td>Phone:</td>
-                                    <td>${phone}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        ${address}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        ${website}
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <h1 style="font-size: 18px; font-weight: bold; margin-top: 20px">Congrats for Registering your account with Greenzone!</h1>
+            <div style="background: white; border: solid 5px Mailtrapwhite; padding: 3px">
+                <table width="95%">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Dear ${firstName},
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br/>
+                                Click on the Link to activate your "Greenzone" Account:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br/>
+                                <a href="${activationLink}">${activationLink}</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br/>
+                                This email was sent to you to prove to us that you own the email account
+                                you registered with.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br/>
+                                Thank you
+                                <br/><br/>
+                                ${company}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br/>
+                                <br/>
+                                <table cellspacing="1" cellpadding="1">
+                                    <tr>
+                                        <td>Email:</td>
+                                        <td>${email}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone:</td>
+                                        <td>${phone}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            ${address}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            ${website}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
     </body>
 </html>
