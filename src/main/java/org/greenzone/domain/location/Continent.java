@@ -19,25 +19,31 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.login.email;
+package org.greenzone.domain.location;
 
+import org.greenzone.domain.Domain;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
- * @author EN - Dec 16, 2024
+ * @author EN - Dec 20, 2024
  */
 @Data
-@Builder
-@AllArgsConstructor
+@EqualsAndHashCode( callSuper = true, onlyExplicitlyIncluded = true )
+@SuperBuilder
 @NoArgsConstructor
-public class LoginResponse {
+@AllArgsConstructor
+@Entity
+@Table( name = "continent" )
+public class Continent extends Domain {
 
-    private String token;
-    private Boolean needsValidateEmailActivationCode;
-    private String[] roles;
-    private Long id;
-    private String username;
+    @Column( name = "name", nullable = false, unique = false, length = 100 )
+    private String name;
 }

@@ -19,7 +19,7 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.login.email;
+package org.greenzone.service.admins.create;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,17 +27,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author EN - Dec 16, 2024
+ * @author EN - Dec 20, 2024
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginResponse {
+public class CreateAdminRequest {
 
-    private String token;
-    private Boolean needsValidateEmailActivationCode;
-    private String[] roles;
-    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
     private String username;
+    private String password;
+    private String passwordAlt;
+    private Long countryId;
 }

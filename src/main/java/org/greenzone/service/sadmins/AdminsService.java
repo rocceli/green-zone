@@ -19,25 +19,24 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.login.email;
+package org.greenzone.service.sadmins;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.greenzone.service.admins.create.CreateAdminInitialData;
+import org.greenzone.service.admins.create.CreateAdminRequest;
+import org.greenzone.service.admins.create.CreateAdminResponse;
+import org.greenzone.service.admins.view.ViewAdminsInitialData;
+import org.springframework.http.ResponseEntity;
 
 /**
- * @author EN - Dec 16, 2024
+ * @author EN - Dec 20, 2024
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class LoginResponse {
+public interface AdminsService {
 
-    private String token;
-    private Boolean needsValidateEmailActivationCode;
-    private String[] roles;
-    private Long id;
-    private String username;
+    ResponseEntity<CreateAdminInitialData> getCreateAdminInitialData();
+
+
+    ViewAdminsInitialData getViewAdminsInitialData();
+
+
+    ResponseEntity<CreateAdminResponse> createAdmin( CreateAdminRequest request );
 }

@@ -19,25 +19,21 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.login.email;
+package org.greenzone.helper.country;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Comparator;
+
+import org.springframework.stereotype.Component;
 
 /**
- * @author EN - Dec 16, 2024
+ * @author EN - Dec 20, 2024
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class LoginResponse {
+@Component
+public class CountryTOComparator implements Comparator<CountryTO> {
 
-    private String token;
-    private Boolean needsValidateEmailActivationCode;
-    private String[] roles;
-    private Long id;
-    private String username;
+    @Override
+    public int compare( CountryTO o1, CountryTO o2 ) {
+
+        return o1.getName().compareTo( o2.getName() );
+    }
 }

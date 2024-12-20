@@ -19,25 +19,25 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.login.email;
+package org.greenzone.service.admins.create;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.greenzone.service.admins.create.CreateAdminResponse.CreateAdminResponseBuilder;
+import org.springframework.http.HttpStatus;
 
 /**
- * @author EN - Dec 16, 2024
+ * @author EN - Dec 20, 2024
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class LoginResponse {
+public interface CreateAdminRequestValidator {
 
-    private String token;
-    private Boolean needsValidateEmailActivationCode;
-    private String[] roles;
-    private Long id;
-    private String username;
+    HttpStatus validate(
+            CreateAdminResponseBuilder builder,
+            Boolean emailAlreadyRegistered,
+            Boolean usernameAlreadyRegistered,
+            String firstName,
+            String lastName,
+            String email,
+            String username,
+            String password,
+            String passwordAlt,
+            Long countryId );
 }

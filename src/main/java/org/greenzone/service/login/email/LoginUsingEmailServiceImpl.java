@@ -83,6 +83,8 @@ public class LoginUsingEmailServiceImpl implements LoginUsingEmailService {
         String password = stringHelper.trim( request.getPassword() );
         Optional<User> optionalUser = userRepository.findByEmail( email );
         String jwtToken = null;
+        String userName = optionalUser.get().getUsername();
+        Long id = optionalUser.get().getId();
         Boolean needsValidateEmailActivationCode = Boolean.FALSE;
         HttpStatus httpStatus = HttpStatus.OK;
         String[] roles = {};
@@ -142,6 +144,8 @@ public class LoginUsingEmailServiceImpl implements LoginUsingEmailService {
                         .token( jwtToken )
                         .needsValidateEmailActivationCode( needsValidateEmailActivationCode )
                         .roles( roles )
+                        .id( id )
+                        .username( userName )
                         .build();
 
         return ResponseEntity

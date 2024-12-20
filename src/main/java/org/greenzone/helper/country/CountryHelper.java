@@ -19,25 +19,12 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.login.email;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package org.greenzone.helper.country;
 
 /**
- * @author EN - Dec 16, 2024
+ * @author EN - Dec 20, 2024
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class LoginResponse {
+public interface CountryHelper {
 
-    private String token;
-    private Boolean needsValidateEmailActivationCode;
-    private String[] roles;
-    private Long id;
-    private String username;
+    CountryTO[] getCountries();
 }
