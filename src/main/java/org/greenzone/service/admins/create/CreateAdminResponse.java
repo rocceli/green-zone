@@ -51,10 +51,10 @@ public class CreateAdminResponse {
     private Boolean emailInvalid;
     private Boolean emailAlreadyRegistered;
 
+    private Boolean countryId;
+
     private Boolean passwordInvalid;
     private Boolean passwordsDoNotMatch;
-
-    private Boolean countryIdNotSet;
 
     private Integer firstNameMinimumLength;
     private Integer firstNameMaximumLength;

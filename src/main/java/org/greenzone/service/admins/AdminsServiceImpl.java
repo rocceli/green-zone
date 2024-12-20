@@ -19,7 +19,7 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.sadmins;
+package org.greenzone.service.admins;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,7 @@ import org.greenzone.domain.user.Role;
 import org.greenzone.domain.user.RoleGroup;
 import org.greenzone.domain.user.RoleGroupType;
 import org.greenzone.domain.user.User;
+import org.greenzone.helper.country.CountryConverter;
 import org.greenzone.helper.country.CountryHelper;
 import org.greenzone.helper.country.CountryTO;
 import org.greenzone.helper.string.StringHelper;
@@ -71,6 +72,7 @@ public class AdminsServiceImpl implements AdminsService {
     private final PasswordEncoder passwordEncoder;
     private final RoleGroupRepository roleGroupRepository;
     private final AdminRepository adminRepository;
+    private final CountryConverter countryConverter;
 
     private AdminTO createAdmin( Admin admin ) {
 
@@ -139,7 +141,7 @@ public class AdminsServiceImpl implements AdminsService {
     @Override
     public ResponseEntity<CreateAdminInitialData> getCreateAdminInitialData() {
 
-        CountryTO[] countries = countryHelper.getCountries();
+        CountryTO[] countries = countryConverter.convertEnumToCountryTO();
 
         CreateAdminInitialData initialData =
                 CreateAdminInitialData.builder().countries( countries ).build();

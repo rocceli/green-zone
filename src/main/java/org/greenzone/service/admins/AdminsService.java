@@ -19,7 +19,7 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.sadmins;
+package org.greenzone.service.admins;
 
 import org.greenzone.service.admins.create.CreateAdminInitialData;
 import org.greenzone.service.admins.create.CreateAdminRequest;

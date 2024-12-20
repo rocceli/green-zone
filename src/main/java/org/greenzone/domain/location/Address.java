@@ -67,7 +67,7 @@ public class Address extends Domain {
 
     @ManyToOne( )
     @JoinColumn( name = "fk_country",
-            foreignKey = @ForeignKey( name = "pledge_address_fk_country" ),
+            foreignKey = @ForeignKey( name = "_address_fk_country" ),
             nullable = false )
     private Country country;
 }

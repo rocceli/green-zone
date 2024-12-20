@@ -21,11 +21,11 @@
  */
 package org.greenzone.controller.superadmin;
 
+import org.greenzone.service.admins.AdminsService;
 import org.greenzone.service.admins.create.CreateAdminInitialData;
 import org.greenzone.service.admins.create.CreateAdminRequest;
 import org.greenzone.service.admins.create.CreateAdminResponse;
 import org.greenzone.service.admins.view.ViewAdminsInitialData;
-import org.greenzone.service.sadmins.AdminsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -71,4 +71,5 @@ public class AdminsController {
 
         return adminService.createAdmin( request );
     }
+
 }

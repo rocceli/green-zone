@@ -286,4 +286,15 @@ public enum CountryEnum {
 
         return name;
     }
+
+
+    public static boolean exists( Long countryId ) {
+
+        for ( CountryEnum country : CountryEnum.values() ) {
+            if ( country.getId().equals( countryId ) ) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

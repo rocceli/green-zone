@@ -21,6 +21,7 @@
  */
 package org.greenzone.service.admins.create;
 
+import org.greenzone.domain.location.CountryEnum;
 import org.greenzone.helper.email.EmailHelper;
 import org.greenzone.helper.password.PasswordHelper;
 import org.greenzone.service.admins.create.CreateAdminResponse.CreateAdminResponseBuilder;
@@ -100,6 +101,7 @@ public class CreateAdminRequestValidatorImpl implements CreateAdminRequestValida
         Boolean passwordInvalid = Boolean.FALSE;
         Boolean passwordsDoNotMatch = Boolean.FALSE;
         Boolean countryIdNotSet = Boolean.FALSE;
+
         HttpStatus httpStatus = HttpStatus.CREATED;
 
         if ( usernameAlreadyRegistered ) {
@@ -154,6 +156,11 @@ public class CreateAdminRequestValidatorImpl implements CreateAdminRequestValida
             passwordsDoNotMatch = Boolean.TRUE;
             hasValdationErrors = Boolean.TRUE;
         }
+
+        if ( countryId == null || !CountryEnum.exists( countryId ) ) {
+            countryIdNotSet = Boolean.TRUE;
+            hasValdationErrors = Boolean.TRUE;
+        }
         else {
 
             Boolean passwordValid = passwordHelper.passwordValid( password );
@@ -163,12 +170,6 @@ public class CreateAdminRequestValidatorImpl implements CreateAdminRequestValida
 
                 hasValdationErrors = Boolean.TRUE;
             }
-        }
-
-        if ( countryId == null ) {
-
-            countryIdNotSet = Boolean.TRUE;
-            hasValdationErrors = Boolean.TRUE;
         }
 
         if ( hasValdationErrors ) {
@@ -181,6 +182,7 @@ public class CreateAdminRequestValidatorImpl implements CreateAdminRequestValida
                 .firstNameTooLong( firstNameTooLong )
                 .lastNameTooShort( lastNameTooShort )
                 .lastNameTooLong( lastNameTooLong )
+                .countryId( countryIdNotSet )
                 .usernameTooShort( usernameTooShort )
                 .usernameTooLong( usernameTooLong )
                 .usernameAlreadyRegistered( usernameAlreadyRegistered )
@@ -188,7 +190,6 @@ public class CreateAdminRequestValidatorImpl implements CreateAdminRequestValida
                 .emailAlreadyRegistered( emailAlreadyRegistered )
                 .passwordsDoNotMatch( passwordsDoNotMatch )
                 .passwordInvalid( passwordInvalid )
-                .countryIdNotSet( countryIdNotSet )
                 .passwordMinimumLength( passwordMinimumLength )
                 .passwordMaximumLength( passwordMaximumLength )
                 .passwordNeedsLetters( passwordNeedsLetters )
