@@ -22,6 +22,7 @@
 package org.greenzone.domain.admin;
 
 import org.greenzone.domain.Domain;
+import org.greenzone.domain.location.Country;
 import org.greenzone.domain.user.User;
 
 import jakarta.persistence.Entity;
@@ -46,6 +47,12 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table( name = "_admin" )
 public class Admin extends Domain {
+
+    @ManyToOne( )
+    @JoinColumn( name = "fk_country",
+            foreignKey = @ForeignKey( name = "_admin_fk_country" ),
+            nullable = false )
+    private Country country;
 
     @ManyToOne( )
     @JoinColumn(

@@ -23,21 +23,19 @@ package org.greenzone.service.admins;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.greenzone.domain.admin.Admin;
-import org.greenzone.domain.location.Address;
 import org.greenzone.domain.location.Country;
 import org.greenzone.domain.user.Role;
 import org.greenzone.domain.user.RoleGroup;
 import org.greenzone.domain.user.RoleGroupType;
 import org.greenzone.domain.user.User;
 import org.greenzone.helper.country.CountryConverter;
-import org.greenzone.helper.country.CountryHelper;
 import org.greenzone.helper.country.CountryTO;
 import org.greenzone.helper.string.StringHelper;
 import org.greenzone.repository.admin.AdminRepository;
-import org.greenzone.repository.location.AddressRepository;
 import org.greenzone.repository.location.CountryRepository;
 import org.greenzone.repository.user.RoleGroupRepository;
 import org.greenzone.repository.user.UserRepository;
@@ -64,9 +62,7 @@ import lombok.RequiredArgsConstructor;
 public class AdminsServiceImpl implements AdminsService {
 
     private final UserRepository userRepository;
-    private final CountryHelper countryHelper;
     private final CountryRepository countryRepository;
-    private final AddressRepository addressRepository;
     private final StringHelper stringHelper;
     private final CreateAdminRequestValidator createAdminRequestValidator;
     private final PasswordEncoder passwordEncoder;
@@ -117,26 +113,6 @@ public class AdminsServiceImpl implements AdminsService {
     }
 
 
-    private void saveAddress(
-            User savedUser, String addressLine1, String addressLine2, String addressLine3,
-            String addressLine4, String townCity, String zipPostcode, Long countryId ) {
-
-        Country country = countryRepository.findById( countryId ).get();
-
-        Address address =
-                Address.builder()
-                        .line1( addressLine1 )
-                        .line2( addressLine2 )
-                        .line3( addressLine3 )
-                        .line4( addressLine4 )
-                        .townCity( townCity )
-                        .zipPostcode( zipPostcode )
-                        .country( country )
-                        .build();
-
-        addressRepository.save( address );
-    }
-
 
     @Override
     public ResponseEntity<CreateAdminInitialData> getCreateAdminInitialData() {
@@ -176,6 +152,8 @@ public class AdminsServiceImpl implements AdminsService {
         String password = stringHelper.trim( request.getPassword() );
         String passwordAlt = stringHelper.trim( request.getPasswordAlt() );
         Long countryId = request.getCountryId();
+        Optional<Country> countryQ = countryRepository.findById( countryId );
+        Country country = countryQ.get();
         CreateAdminResponseBuilder builder = CreateAdminResponse.builder();
 
         Boolean emailAlreadyRegistered = getEmailAlreadyRegistered( email );
@@ -207,8 +185,7 @@ public class AdminsServiceImpl implements AdminsService {
 
             user.getRoles().addAll( roles );
             User savedUser = userRepository.save( user );
-            saveAddress( savedUser, null, null, null, null, null, null, countryId );
-            Admin admin = Admin.builder().user( savedUser ).build();
+            Admin admin = Admin.builder().country( country ).user( savedUser ).build();
             adminRepository.save( admin );
 
             builder.adminId( admin.getId() );

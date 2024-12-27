@@ -23,6 +23,7 @@ package org.greenzone.domain.project;
 
 import org.greenzone.domain.Domain;
 import org.greenzone.domain.location.Address;
+import org.greenzone.domain.user.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -62,4 +63,10 @@ public class Project extends Domain {
             foreignKey = @ForeignKey( name = "_project_fk_address" ),
             nullable = false )
     private Address address;
+
+    @ManyToOne( )
+    @JoinColumn( name = "fk_user",
+            foreignKey = @ForeignKey( name = "_project_fk_user" ),
+            nullable = false )
+    private User user;
 }

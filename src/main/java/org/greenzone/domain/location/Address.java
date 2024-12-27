@@ -65,6 +65,12 @@ public class Address extends Domain {
     @Column( name = "zipPostcode", nullable = true, unique = false, length = 12 )
     private String zipPostcode;
 
+    @Column( name = "longitude", nullable = false, unique = false, length = 20 )
+    private String longitude;
+
+    @Column( name = "latitude", nullable = false, unique = false, length = 20 )
+    private String latitude;
+
     @ManyToOne( )
     @JoinColumn( name = "fk_country",
             foreignKey = @ForeignKey( name = "_address_fk_country" ),
