@@ -77,8 +77,8 @@
             <constraint>
               <height>-1</height>
               <width>-1</width>
-              <x>494</x>
-              <y>0</y>
+              <x>487</x>
+              <y>1</y>
             </constraint>
             <sourceConnections>
               <net.java.amateras.uml.classdiagram.model.AssociationModel>
@@ -739,8 +739,8 @@
                         </java.beans.PropertyChangeSupport>
                       </listeners>
                       <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$2" reference="../../../targetConnections/net.java.amateras.uml.classdiagram.model.AssociationModel[2]/source/sourceConnections/net.java.amateras.uml.classdiagram.model.AssociationModel[2]/target/children/net.java.amateras.uml.classdiagram.model.AttributeModel/visibility"/>
-                      <name>value</name>
-                      <type>number 10 o</type>
+                      <name>existenceStatus</name>
+                      <type>boolean m</type>
                       <isStatic>false</isStatic>
                       <isFinal>false</isFinal>
                       <isEnumCst>false</isEnumCst>
@@ -759,8 +759,8 @@
                           <null/>
                         </java.beans.PropertyChangeSupport>
                       </listeners>
-                      <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$2" reference="../../../targetConnections/net.java.amateras.uml.classdiagram.model.AssociationModel[2]/source/sourceConnections/net.java.amateras.uml.classdiagram.model.AssociationModel[2]/target/children/net.java.amateras.uml.classdiagram.model.AttributeModel/visibility"/>
-                      <name>existenceStatus</name>
+                      <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$2"/>
+                      <name>nonFungibleStatus</name>
                       <type>boolean m</type>
                       <isStatic>false</isStatic>
                       <isFinal>false</isFinal>
@@ -1473,7 +1473,7 @@
                 <bendpoints/>
                 <stereoType>Addr has Fk</stereoType>
                 <fromMultiplicity>1</fromMultiplicity>
-                <toMultiplicity>1</toMultiplicity>
+                <toMultiplicity>1..*</toMultiplicity>
               </net.java.amateras.uml.classdiagram.model.AssociationModel>
             </targetConnections>
             <children>
@@ -1533,9 +1533,9 @@
                     <null/>
                   </java.beans.PropertyChangeSupport>
                 </listeners>
-                <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$2" reference="../../../sourceConnections/net.java.amateras.uml.classdiagram.model.AssociationModel/target/targetConnections/net.java.amateras.uml.classdiagram.model.AssociationModel[2]/source/sourceConnections/net.java.amateras.uml.classdiagram.model.AssociationModel[2]/target/children/net.java.amateras.uml.classdiagram.model.AttributeModel/visibility"/>
-                <name>lastpost</name>
-                <type>string 128 m</type>
+                <visibility class="net.java.amateras.uml.classdiagram.model.Visibility$2"/>
+                <name>sizeArea</name>
+                <type>string 4096 m</type>
                 <isStatic>false</isStatic>
                 <isFinal>false</isFinal>
                 <isEnumCst>false</isEnumCst>
