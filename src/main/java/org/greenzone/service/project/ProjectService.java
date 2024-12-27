@@ -19,17 +19,15 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.repository.project;
+package org.greenzone.service.project;
 
-import java.util.List;
-
-import org.greenzone.domain.project.Project;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.greenzone.domain.user.User;
+import org.greenzone.service.project.view.ViewProjectsResponse;
 
 /**
- * @author EN - Dec 27, 2024
+ * @author EN - Dec 28, 2024
  */
-public interface ProjectRepository extends JpaRepository<Project, Long> {
+public interface ProjectService {
 
-    List<Project> findByUserEnabledTrueAndUserActiveTrueAndUserId( Long userId );
+    ViewProjectsResponse getViewProjectsInitialData( User user );
 }

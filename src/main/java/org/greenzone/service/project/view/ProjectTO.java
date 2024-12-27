@@ -37,7 +37,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProjectTO {
 
-    private Long ownerId;
     private Long id;
     private String description;
     private String stage;
