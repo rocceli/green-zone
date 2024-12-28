@@ -25,3 +25,13 @@ NULL, 'elation2');
 INSERT INTO user_role
 (user_id, role_id)
 VALUES(2, 3);
+
+
+
+INSERT INTO "_address"
+(id, created_at, updated_at, line_1, line_2, line_3, line_4, town_city, longitude, latitude, fk_country)
+VALUES(1, '2024-10-10 11:38:57.761', '2024-10-10 11:47:42.928', NULL, NULL, NULL, NULL, 'Nairobi', '37', '15', 109);
+
+INSERT INTO "_project"
+(id, created_at, updated_at, stage, description, size_area, fk_address, fk_user )
+VALUES(1, '2024-10-10 11:38:57.761', '2024-10-10 11:47:42.928','Planting', 'This is a food security community farming project for locals in Mukuru Kwa Njenga', '1000 acres', 1, 1 );
