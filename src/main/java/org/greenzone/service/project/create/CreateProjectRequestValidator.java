@@ -10,7 +10,7 @@
     
     For further details look at or request greenzone-license.txt for further details.
 
-    Copyright (C) 2024 
+    Copyright (C) 2025 
 
     Email:  elijah.ngugi.gachuki@gmail.com
     Domain: N/A
@@ -19,30 +19,25 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.project.view;
+package org.greenzone.service.project.create;
 
-import java.util.Calendar;
-
-import org.greenzone.domain.location.Address;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.greenzone.service.project.create.CreateProjectResponse.CreateProjectResponseBuilder;
+import org.springframework.http.HttpStatus;;
 
 /**
- * @author EN - Dec 27, 2024
+ * @author EN - Jan 2, 2025
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class ProjectTO {
+public interface CreateProjectRequestValidator {
 
-    private Long id;
-    private Calendar createdAt;
-    private String description;
-    private String stage;
-    private String sizeArea;
-    private Address address;
+    HttpStatus validate(
+            CreateProjectResponseBuilder builder,
+            String projectDescription,
+            String projectSizeArea,
+            String projectStage,
+            String projectLine1,
+            String projectLine2,
+            String longitude,
+            String latitude,
+            String townCity,
+            Long countryId );
 }

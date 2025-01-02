@@ -30,8 +30,32 @@ VALUES(2, 3);
 
 INSERT INTO "_address"
 (id, created_at, updated_at, line_1, line_2, line_3, line_4, town_city, longitude, latitude, fk_country)
-VALUES(1, '2024-10-10 11:38:57.761', '2024-10-10 11:47:42.928', NULL, NULL, NULL, NULL, 'Nairobi', '37', '15', 109);
+VALUES(1, '2024-10-10 11:38:57.761', '2024-10-10 11:47:42.928', NULL, NULL, '1139', 'Ngong', 'Nairobi', '37', '15', 109);
+
+INSERT INTO "_address"
+(id, created_at, updated_at, line_1, line_2, line_3, line_4, town_city, longitude, latitude, fk_country)
+VALUES(2, '2024-10-11 09:15:30.123', '2024-10-11 09:20:45.456', '4567', NULL,  NULL, 'Kibera', 'Nairobi', '36.8219', '-1.2921', 109);
+
+INSERT INTO "_address"
+(id, created_at, updated_at, line_1, line_2, line_3, line_4, town_city, longitude, latitude, fk_country)
+VALUES(3, '2024-10-12 10:00:00.000', '2024-10-12 10:05:00.000', '7890', NULL, NULL, 'Westlands', 'Nairobi', '36.7954', '-1.2632', 109);
+
+INSERT INTO "_address"
+(id, created_at, updated_at, line_1, line_2, line_3, line_4, town_city, longitude, latitude, fk_country)
+VALUES(4, '2024-10-13 14:30:00.000', '2024-10-13 14:35:00.000', '1234', NULL, NULL, 'Karen', 'Nairobi', '36.6880', '-1.3210', 109);
+
+INSERT INTO "_project"
+(id, created_at, updated_at, stage, description, size_area, fk_address, fk_user)
+VALUES(2, '2024-10-11 09:15:30.123', '2024-10-11 09:20:45.456', 'Kibera Green-Up', 'A community initiative aimed at cleaning and beautifying the Kibera area.', '500', 2, 1);
 
 INSERT INTO "_project"
 (id, created_at, updated_at, stage, description, size_area, fk_address, fk_user )
-VALUES(1, '2024-10-10 11:38:57.761', '2024-10-10 11:47:42.928','Planting', 'This is a food security community farming project for locals in Mukuru Kwa Njenga', '1000 acres', 1, 1 );
+VALUES(1, '2024-10-10 11:38:57.761', '2024-10-10 11:47:42.928','Njaa Revolution', 'This is a food security community farming project for locals in Gishagi Ngong', '1000 ', 1, 1 );
+
+INSERT INTO "_project"
+(id, created_at, updated_at, stage, description, size_area, fk_address, fk_user)
+VALUES(3, '2024-10-12 10:00:00.000', '2024-10-12 10:05:00.000', 'Westlands Revitalization', 'A project focused on enhancing public spaces and parks in Westlands.', '800', 3, 1);
+
+INSERT INTO "_project"
+(id, created_at, updated_at, stage, description, size_area, fk_address, fk_user)
+VALUES(4, '2024-10-13 14:30:00.000', '2024-10-13 14:35:00.000', 'Karen Community Garden', 'Establishing a community garden to promote local food production in Karen.', '600', 4, 1);

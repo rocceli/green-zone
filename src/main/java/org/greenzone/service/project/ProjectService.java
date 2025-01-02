@@ -22,7 +22,11 @@
 package org.greenzone.service.project;
 
 import org.greenzone.domain.user.User;
+import org.greenzone.service.project.create.CreateProjectInitialData;
+import org.greenzone.service.project.create.CreateProjectRequest;
+import org.greenzone.service.project.create.CreateProjectResponse;
 import org.greenzone.service.project.view.ViewProjectsResponse;
+import org.springframework.http.ResponseEntity;
 
 /**
  * @author EN - Dec 28, 2024
@@ -30,4 +34,10 @@ import org.greenzone.service.project.view.ViewProjectsResponse;
 public interface ProjectService {
 
     ViewProjectsResponse getViewProjectsInitialData( User user );
+
+
+    CreateProjectInitialData getCreateProjectInitialData();
+
+
+    ResponseEntity<CreateProjectResponse> createProject( CreateProjectRequest request, User user );
 }

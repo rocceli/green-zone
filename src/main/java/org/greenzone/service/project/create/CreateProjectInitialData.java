@@ -10,7 +10,7 @@
     
     For further details look at or request greenzone-license.txt for further details.
 
-    Copyright (C) 2024 
+    Copyright (C) 2025 
 
     Email:  elijah.ngugi.gachuki@gmail.com
     Domain: N/A
@@ -19,11 +19,9 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.project.view;
+package org.greenzone.service.project.create;
 
-import java.util.Calendar;
-
-import org.greenzone.domain.location.Address;
+import org.greenzone.helper.country.CountryTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,18 +29,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author EN - Dec 27, 2024
+ * @author EN - Jan 2, 2025
  */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProjectTO {
+public class CreateProjectInitialData {
 
-    private Long id;
-    private Calendar createdAt;
-    private String description;
-    private String stage;
-    private String sizeArea;
-    private Address address;
+    private CountryTO[] countries;
 }

@@ -16,6 +16,46 @@ first-name:
     minimum-length: 2
     maximum-length: 32
 
+project-description:
+  validation:
+    minimum-length: 7
+    maximum-length: 4096
+
+project-stage:
+  validation:
+    minimum-length: 7
+    maximum-length: 32
+
+project-size-area:
+  validation:
+    minimum-length: 7
+    maximum-length: 32
+
+address-line1:
+  validation:
+    minimum-length: 7
+    maximum-length: 32
+
+address-line2:
+  validation:
+    minimum-length: 7
+    maximum-length: 32
+
+address-town-city:
+  validation:
+    minimum-length: 7
+    maximum-length: 32
+
+address-longitude:
+  validation:
+    minimum-length: 1
+    maximum-length: 20
+
+address-latitude:
+  validation:
+    minimum-length: 1
+    maximum-length: 20
+
 jwt:
   life-in-milliseconds: 6000000
 

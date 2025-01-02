@@ -24,11 +24,16 @@ package org.greenzone.controller.grower;
 import org.greenzone.domain.user.User;
 import org.greenzone.helper.loggedin.LoggedInCredentialsHelper;
 import org.greenzone.service.project.ProjectService;
+import org.greenzone.service.project.create.CreateProjectInitialData;
+import org.greenzone.service.project.create.CreateProjectRequest;
+import org.greenzone.service.project.create.CreateProjectResponse;
 import org.greenzone.service.project.view.ViewProjectsResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,5 +60,27 @@ public class ProjectController {
                 user );
 
         return ResponseEntity.status( HttpStatus.OK ).body( viewProjectsInitialData );
+    }
+
+
+    @GetMapping( "/project/create/initialdata" )
+    @PreAuthorize( "hasAuthority('GROWER' )" )
+    public ResponseEntity<CreateProjectInitialData> getCreateProjectInitialData() {
+
+        CreateProjectInitialData createProjectInitialData = projectservice
+                .getCreateProjectInitialData();
+
+        return ResponseEntity.status( HttpStatus.OK ).body( createProjectInitialData );
+    }
+
+
+    @PostMapping( "project/create" )
+    @PreAuthorize( "hasAuthority('GROWER' )" )
+    public ResponseEntity<CreateProjectResponse> createProject(
+            @RequestBody CreateProjectRequest request ) {
+
+        User user = loggedInCredentialsHelper.getLoggedInUser();
+
+        return projectservice.createProject( request, user );
     }
 }

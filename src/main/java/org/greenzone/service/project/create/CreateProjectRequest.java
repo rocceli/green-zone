@@ -21,10 +21,28 @@
  */
 package org.greenzone.service.project.create;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author EN - Dec 27, 2024
  */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CreateProjectRequest {
 
+    private String projectDescription;
+    private String projectSizeArea;
+    private String projectStage;
+    private String projectAddressLine1;
+    private String projectAddressLine2;
+    private String projectAddressTownCity;
+    private String projectAddressZipPostcode;
+    private String latitude;
+    private Long countryId;
+    private String longitude;
 }
