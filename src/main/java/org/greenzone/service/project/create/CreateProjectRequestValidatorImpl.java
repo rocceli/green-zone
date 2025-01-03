@@ -36,6 +36,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CreateProjectRequestValidatorImpl implements CreateProjectRequestValidator {
 
+    @Value( "${username.validation.minimum-length}" )
+    private Integer projectNameMinimumLength;
+
+    @Value( "${username.validation.maximum-length}" )
+    private Integer projectNameMaximumLength;
+
     @Value( "${project-description.validation.minimum-length}" )
     private Integer projectDescriptionMinimumLength;
 
@@ -85,11 +91,15 @@ public class CreateProjectRequestValidatorImpl implements CreateProjectRequestVa
     private Integer latitudeMinimumLength;
 
     @Override
-    public HttpStatus validate( CreateProjectResponseBuilder builder, String projectDescription,
+    public HttpStatus validate( CreateProjectResponseBuilder builder, String projectName,
+            String projectDescription,
             String projectSizeArea, String projectStage, String projectLine1, String projectLine2,
             String longitude, String latitude, String townCity, Long countryId ) {
 
         Boolean hasValidationErrors = Boolean.FALSE;
+
+        Boolean projectNameTooShort = Boolean.FALSE;
+        Boolean projectNameTooLong = Boolean.FALSE;
 
         Boolean projectDescriptionTooShort = Boolean.FALSE;
         Boolean projectDescriptionTooLong = Boolean.FALSE;
@@ -120,7 +130,34 @@ public class CreateProjectRequestValidatorImpl implements CreateProjectRequestVa
         Boolean townCityTooShort = Boolean.FALSE;
         Boolean townCityTooLong = Boolean.FALSE;
 
+        if ( projectName == null || projectName
+                .length() < projectDescriptionMinimumLength ) {
+
+            projectNameTooShort = Boolean.TRUE;
+            hasValidationErrors = Boolean.TRUE;
+        }
+
+        if ( projectName != null && projectName
+                .length() > projectDescriptionMaximumLength ) {
+
+            projectNameTooLong = Boolean.TRUE;
+            hasValidationErrors = Boolean.TRUE;
+        }
         HttpStatus httpStatus = HttpStatus.CREATED;
+
+        if ( projectName == null || projectName
+                .length() < projectNameMinimumLength ) {
+
+            projectNameTooShort = Boolean.TRUE;
+            hasValidationErrors = Boolean.TRUE;
+        }
+
+        if ( projectName != null && projectName
+                .length() > projectNameMaximumLength ) {
+
+            projectNameTooLong = Boolean.TRUE;
+            hasValidationErrors = Boolean.TRUE;
+        }
 
         if ( projectDescription == null || projectDescription
                 .length() < projectDescriptionMinimumLength ) {
@@ -129,7 +166,7 @@ public class CreateProjectRequestValidatorImpl implements CreateProjectRequestVa
             hasValidationErrors = Boolean.TRUE;
         }
 
-        if ( projectDescription != null || projectDescription
+        if ( projectDescription != null && projectDescription
                 .length() > projectDescriptionMaximumLength ) {
 
             projectDescriptionTooLong = Boolean.TRUE;
@@ -143,14 +180,14 @@ public class CreateProjectRequestValidatorImpl implements CreateProjectRequestVa
             hasValidationErrors = Boolean.TRUE;
         }
 
-        if ( projectStage != null || projectStage
+        if ( projectStage != null && projectStage
                 .length() > projectStageMaximumLength ) {
 
             projectStageTooLong = Boolean.TRUE;
             hasValidationErrors = Boolean.TRUE;
         }
 
-        if ( projectSizeArea != null || projectSizeArea
+        if ( projectSizeArea != null && projectSizeArea
                 .length() > projectSizeAreaMaximumLength ) {
 
             projectSizeAreaTooLong = Boolean.TRUE;
@@ -186,21 +223,21 @@ public class CreateProjectRequestValidatorImpl implements CreateProjectRequestVa
             }
         }
 
-        if ( townCity != null || townCity
+        if ( townCity != null && townCity
                 .length() > addressTownCityMaximumLength ) {
 
             townCityTooLong = Boolean.TRUE;
             hasValidationErrors = Boolean.TRUE;
         }
 
-        if ( townCity == null || projectLine2
+        if ( townCity == null || townCity
                 .length() < addressTownCityMinimumLength ) {
 
             townCityTooShort = Boolean.TRUE;
             hasValidationErrors = Boolean.TRUE;
         }
 
-        if ( longitude != null || longitude
+        if ( longitude != null && longitude
                 .length() > longitudeMaximumLength ) {
 
             longitudeTooLong = Boolean.TRUE;
@@ -214,7 +251,7 @@ public class CreateProjectRequestValidatorImpl implements CreateProjectRequestVa
             hasValidationErrors = Boolean.TRUE;
         }
 
-        if ( latitude != null || latitude
+        if ( latitude != null && latitude
                 .length() > latitudeMaximumLength ) {
 
             latitudeTooLong = Boolean.TRUE;
@@ -241,6 +278,8 @@ public class CreateProjectRequestValidatorImpl implements CreateProjectRequestVa
         builder
                 .hasValidationErrors( hasValidationErrors )
                 .countryIdNotSet( countryIdNotSet )
+                .projectNameTooLong( projectNameTooLong )
+                .projectNameTooShort( projectNameTooShort )
                 .latitudeTooLong( latitudeTooLong )
                 .latitudeTooShort( latitudeTooShort )
                 .line1TooLong( line1TooLong )

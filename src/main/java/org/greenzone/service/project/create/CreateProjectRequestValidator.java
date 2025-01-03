@@ -31,6 +31,7 @@ public interface CreateProjectRequestValidator {
 
     HttpStatus validate(
             CreateProjectResponseBuilder builder,
+            String projectName,
             String projectDescription,
             String projectSizeArea,
             String projectStage,

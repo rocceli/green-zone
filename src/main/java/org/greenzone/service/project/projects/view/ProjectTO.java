@@ -19,7 +19,11 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.project.view;
+package org.greenzone.service.project.projects.view;
+
+import java.util.Calendar;
+
+import org.greenzone.domain.location.Address;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,7 +37,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ViewProjectsResponse {
+public class ProjectTO {
 
-    private ProjectTO[] projects;
+    private Long id;
+    private String name;
+    private Calendar createdAt;
+    private String description;
+    private String stage;
+    private String sizeArea;
+    private Address address;
 }

@@ -23,38 +23,38 @@ project-description:
 
 project-stage:
   validation:
-    minimum-length: 7
-    maximum-length: 32
+    minimum-length: 4
+    maximum-length: 256
 
 project-size-area:
   validation:
-    minimum-length: 7
-    maximum-length: 32
+    minimum-length: 3
+    maximum-length: 256
 
 address-line1:
   validation:
-    minimum-length: 7
+    minimum-length: 0
     maximum-length: 32
 
 address-line2:
   validation:
-    minimum-length: 7
+    minimum-length: 0
     maximum-length: 32
 
 address-town-city:
   validation:
-    minimum-length: 7
+    minimum-length: 3
     maximum-length: 32
 
 address-longitude:
   validation:
     minimum-length: 1
-    maximum-length: 20
+    maximum-length: 128
 
 address-latitude:
   validation:
     minimum-length: 1
-    maximum-length: 20
+    maximum-length: 128
 
 jwt:
   life-in-milliseconds: 6000000

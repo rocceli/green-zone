@@ -40,8 +40,9 @@ import org.greenzone.service.project.create.CreateProjectRequest;
 import org.greenzone.service.project.create.CreateProjectRequestValidator;
 import org.greenzone.service.project.create.CreateProjectResponse;
 import org.greenzone.service.project.create.CreateProjectResponse.CreateProjectResponseBuilder;
-import org.greenzone.service.project.view.ProjectTO;
-import org.greenzone.service.project.view.ViewProjectsResponse;
+import org.greenzone.service.project.projects.view.ProjectTO;
+import org.greenzone.service.project.projects.view.ViewProjectsResponse;
+import org.greenzone.service.project.view.ViewProjectResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -66,6 +67,7 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectTO createProject( Project project ) {
 
         ProjectTO projectTO = ProjectTO.builder()
+                .name( project.getName() )
                 .id( project.getId() )
                 .createdAt( project.getCreatedAt() )
                 .address( project.getAddress() )
@@ -118,6 +120,8 @@ public class ProjectServiceImpl implements ProjectService {
     public ResponseEntity<CreateProjectResponse> createProject( CreateProjectRequest request,
             User user ) {
 
+        String name = stringHelper.trimAndCapitaliseFirstLetter( request
+                .getProjectName() );
         String description = stringHelper.trimAndCapitaliseFirstLetter( request
                 .getProjectDescription() );
         String stage = stringHelper.trimAndCapitaliseFirstLetter( request.getProjectStage() );
@@ -134,7 +138,7 @@ public class ProjectServiceImpl implements ProjectService {
 
         CreateProjectResponseBuilder builder = CreateProjectResponse.builder();
 
-        HttpStatus httpStatus = createProjectRequestValidator.validate( builder, description,
+        HttpStatus httpStatus = createProjectRequestValidator.validate( builder, name, description,
                 sizeArea, stage, line1, line2, longitude, latitude, townCity, countryId );
 
         CreateProjectResponse response = builder.build();
@@ -167,6 +171,7 @@ public class ProjectServiceImpl implements ProjectService {
                     addressRepository.save( address );
 
                     Project project = Project.builder()
+                            .name( name )
                             .address( address )
                             .description( description )
                             .sizeArea( sizeArea )
@@ -187,6 +192,26 @@ public class ProjectServiceImpl implements ProjectService {
         response = builder.build();
 
         return ResponseEntity.status( httpStatus ).body( response );
+    }
+
+
+    @Override
+    public ViewProjectResponse getviewProject( Long id ) {
+
+        Optional<Project> projectOpt = projectRepository.findById( id );
+        Project project = null;
+        ViewProjectResponse viewProjectResponse = null;
+        if ( projectOpt.isPresent() ) {
+            project = projectOpt.get();
+            viewProjectResponse = ViewProjectResponse.builder().address( project.getAddress() )
+                    .ownerId( project.getUser().getId() ).ownerName( project.getUser()
+                            .getUsername() )
+                    .CreatedAt( project.getCreatedAt() ).projectName(
+                            project.getName() ).projectDescription( project.getDescription() )
+                    .projectSizeArea( project.getSizeArea() ).projectStage( project.getStage() )
+                    .projectId( id ).build();
+        }
+        return viewProjectResponse;
     }
 
 }

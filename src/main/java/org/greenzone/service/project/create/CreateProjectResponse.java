@@ -37,6 +37,9 @@ public class CreateProjectResponse {
 
     private Boolean hasValidationErrors;
 
+    private Boolean projectNameTooShort;
+    private Boolean projectNameTooLong;
+
     private Boolean projectDescriptionTooShort;
     private Boolean projectDescriptionTooLong;
 

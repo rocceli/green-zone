@@ -49,6 +49,9 @@ import lombok.experimental.SuperBuilder;
 @Table( name = "_project" )
 public class Project extends Domain {
 
+    @Column( name = "name", nullable = false, unique = false, length = 32 )
+    private String name;
+
     @Column( name = "stage", nullable = false, unique = false, length = 32 )
     private String stage;
 

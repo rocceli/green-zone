@@ -27,11 +27,13 @@ import org.greenzone.service.project.ProjectService;
 import org.greenzone.service.project.create.CreateProjectInitialData;
 import org.greenzone.service.project.create.CreateProjectRequest;
 import org.greenzone.service.project.create.CreateProjectResponse;
-import org.greenzone.service.project.view.ViewProjectsResponse;
+import org.greenzone.service.project.projects.view.ViewProjectsResponse;
+import org.greenzone.service.project.view.ViewProjectResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,14 +65,21 @@ public class ProjectController {
     }
 
 
-    @GetMapping( "/project/create/initialdata" )
-    @PreAuthorize( "hasAuthority('GROWER' )" )
-    public ResponseEntity<CreateProjectInitialData> getCreateProjectInitialData() {
+    @GetMapping( "/project" )
+    public ResponseEntity<ViewProjectResponse> getViewProject(
+            @PathVariable Long projectId ) {
 
-        CreateProjectInitialData createProjectInitialData = projectservice
-                .getCreateProjectInitialData();
+        User user = loggedInCredentialsHelper.getLoggedInUser();
+        HttpStatus httpStatus = null;
 
-        return ResponseEntity.status( HttpStatus.OK ).body( createProjectInitialData );
+        ViewProjectResponse viewProject = projectservice.getviewProject( projectId );
+        if ( viewProject != null ) {
+            httpStatus = HttpStatus.OK;
+        }
+        else {
+            httpStatus = HttpStatus.NOT_FOUND;
+        }
+        return ResponseEntity.status( httpStatus ).body( viewProject );
     }
 
 
@@ -82,5 +91,16 @@ public class ProjectController {
         User user = loggedInCredentialsHelper.getLoggedInUser();
 
         return projectservice.createProject( request, user );
+    }
+
+
+    @GetMapping( "/project/create/initialdata" )
+    @PreAuthorize( "hasAuthority('GROWER' )" )
+    public ResponseEntity<CreateProjectInitialData> getCreateProjectInitialData() {
+
+        CreateProjectInitialData createProjectInitialData = projectservice
+                .getCreateProjectInitialData();
+
+        return ResponseEntity.status( HttpStatus.OK ).body( createProjectInitialData );
     }
 }

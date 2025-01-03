@@ -19,7 +19,7 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.project.create;
+package org.greenzone.service.project.projects.view;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,17 +33,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateProjectRequest {
+public class ViewProjectsResponse {
 
-    private String projectDescription;
-    private String projectName;
-    private String projectSizeArea;
-    private String projectStage;
-    private String projectAddressLine1;
-    private String projectAddressLine2;
-    private String projectAddressTownCity;
-    private String projectAddressZipPostcode;
-    private String latitude;
-    private Long countryId;
-    private String longitude;
+    private ProjectTO[] projects;
 }
