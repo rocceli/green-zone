@@ -65,11 +65,10 @@ public class ProjectController {
     }
 
 
-    @GetMapping( "/project" )
+    @GetMapping( "/project/{projectId}" )
     public ResponseEntity<ViewProjectResponse> getViewProject(
             @PathVariable Long projectId ) {
 
-        User user = loggedInCredentialsHelper.getLoggedInUser();
         HttpStatus httpStatus = null;
 
         ViewProjectResponse viewProject = projectservice.getviewProject( projectId );

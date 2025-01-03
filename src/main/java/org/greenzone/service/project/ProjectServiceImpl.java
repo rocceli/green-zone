@@ -206,7 +206,7 @@ public class ProjectServiceImpl implements ProjectService {
             viewProjectResponse = ViewProjectResponse.builder().address( project.getAddress() )
                     .ownerId( project.getUser().getId() ).ownerName( project.getUser()
                             .getUsername() )
-                    .CreatedAt( project.getCreatedAt() ).projectName(
+                    .createdAt( project.getCreatedAt() ).projectName(
                             project.getName() ).projectDescription( project.getDescription() )
                     .projectSizeArea( project.getSizeArea() ).projectStage( project.getStage() )
                     .projectId( id ).build();
