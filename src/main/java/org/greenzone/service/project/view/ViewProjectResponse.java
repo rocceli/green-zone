@@ -21,9 +21,7 @@
  */
 package org.greenzone.service.project.view;
 
-import java.util.Calendar;
-
-import org.greenzone.domain.location.Address;
+import org.greenzone.service.project.projects.view.ProjectTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,13 +37,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ViewProjectResponse {
 
-    private Long projectId;
-    private String projectName;
-    private String projectDescription;
-    private String projectStage;
-    private String projectSizeArea;
-    private Address address;
+    private ProjectTO projectTO;
     private Long ownerId;
     private String ownerName;
-    private Calendar createdAt;
 }

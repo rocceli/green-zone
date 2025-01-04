@@ -67,13 +67,13 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectTO createProject( Project project ) {
 
         ProjectTO projectTO = ProjectTO.builder()
-                .name( project.getName() )
-                .id( project.getId() )
-                .createdAt( project.getCreatedAt() )
-                .address( project.getAddress() )
-                .description( project.getDescription() )
-                .stage( project.getStage() )
-                .sizeArea( project.getSizeArea() )
+                .projectName( project.getName() )
+                .projectId( project.getId() )
+                .projectCreatedAt( project.getCreatedAt() )
+                .projectAddress( project.getAddress() )
+                .projectDescription( project.getDescription() )
+                .projectStage( project.getStage() )
+                .projectSizeArea( project.getSizeArea() )
                 .build();
 
         return projectTO;
@@ -202,14 +202,19 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = null;
         ViewProjectResponse viewProjectResponse = null;
         if ( projectOpt.isPresent() ) {
+
             project = projectOpt.get();
-            viewProjectResponse = ViewProjectResponse.builder().address( project.getAddress() )
+
+            viewProjectResponse = ViewProjectResponse.builder()
                     .ownerId( project.getUser().getId() ).ownerName( project.getUser()
                             .getUsername() )
-                    .createdAt( project.getCreatedAt() ).projectName(
-                            project.getName() ).projectDescription( project.getDescription() )
-                    .projectSizeArea( project.getSizeArea() ).projectStage( project.getStage() )
-                    .projectId( id ).build();
+                    .projectTO( ProjectTO.builder().projectAddress( project.getAddress() )
+                            .projectCreatedAt( project.getCreatedAt() ).projectDescription( project
+                                    .getDescription() ).projectName( project.getName() ).projectId(
+                                            project.getId() ).projectStage( project.getStage() )
+                            .projectSizeArea( project.getSizeArea() ).build() )
+                    .build();
+
         }
         return viewProjectResponse;
     }

@@ -39,11 +39,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProjectTO {
 
-    private Long id;
-    private String name;
-    private Calendar createdAt;
-    private String description;
-    private String stage;
-    private String sizeArea;
-    private Address address;
+    private Long projectId;
+    private String projectName;
+    private Calendar projectCreatedAt;
+    private String projectDescription;
+    private String projectStage;
+    private String projectSizeArea;
+    private Address projectAddress;
 }
