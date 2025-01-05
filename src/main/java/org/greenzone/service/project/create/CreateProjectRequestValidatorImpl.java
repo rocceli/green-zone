@@ -130,6 +130,8 @@ public class CreateProjectRequestValidatorImpl implements CreateProjectRequestVa
         Boolean townCityTooShort = Boolean.FALSE;
         Boolean townCityTooLong = Boolean.FALSE;
 
+        HttpStatus httpStatus = HttpStatus.CREATED;
+
         if ( projectName == null || projectName
                 .length() < projectDescriptionMinimumLength ) {
 
@@ -143,7 +145,6 @@ public class CreateProjectRequestValidatorImpl implements CreateProjectRequestVa
             projectNameTooLong = Boolean.TRUE;
             hasValidationErrors = Boolean.TRUE;
         }
-        HttpStatus httpStatus = HttpStatus.CREATED;
 
         if ( projectName == null || projectName
                 .length() < projectNameMinimumLength ) {

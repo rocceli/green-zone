@@ -25,6 +25,8 @@ import org.greenzone.domain.user.User;
 import org.greenzone.service.project.create.CreateProjectInitialData;
 import org.greenzone.service.project.create.CreateProjectRequest;
 import org.greenzone.service.project.create.CreateProjectResponse;
+import org.greenzone.service.project.edit.EditProjectRequest;
+import org.greenzone.service.project.edit.EditProjectResponse;
 import org.greenzone.service.project.projects.view.ViewProjectsResponse;
 import org.greenzone.service.project.view.ViewProjectResponse;
 import org.springframework.http.ResponseEntity;
@@ -44,4 +46,7 @@ public interface ProjectService {
 
 
     ViewProjectResponse getviewProject( Long id );
+
+
+    EditProjectResponse editProject( EditProjectRequest editProjectRequest, long id, User user );
 }

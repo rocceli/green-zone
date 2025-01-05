@@ -46,16 +46,16 @@ VALUES(4, '2024-10-13 14:30:00.000', '2024-10-13 14:35:00.000', '1234', NULL, NU
 
 INSERT INTO "_project"
 (id, created_at, updated_at, name, stage, description, size_area, fk_address, fk_user)
-VALUES(2, '2024-10-11 09:15:30.123', '2024-10-11 09:20:45.456', 'Kibera Green-Up', 'Harvesting', 'A community initiative aimed at cleaning and beautifying the Kibera area.', '500', 2, 1);
+VALUES(2, '2024-10-11 09:15:30.123', '2024-10-11 09:20:45.456', 'Kibera Green-Up', 'Harvesting', 'A community initiative aimed at cleaning and beautifying the Kibera area.', 'less_than_10', 2, 1);
 
 INSERT INTO "_project"
 (id, created_at, updated_at, name, stage, description, size_area, fk_address, fk_user )
-VALUES(1, '2024-10-10 11:38:57.761', '2024-10-10 11:47:42.928','Njaa Revolution', 'Flowering', 'This is a food security community farming project for locals in Gishagi Ngong', '1000 ', 1, 1 );
+VALUES(1, '2024-10-10 11:38:57.761', '2024-10-10 11:47:42.928','Njaa Revolution', 'Flowering', 'This is a food security community farming project for locals in Gishagi Ngong', '500_to_1000', 1, 1 );
 
 INSERT INTO "_project"
 (id, created_at, updated_at, name, stage, description, size_area, fk_address, fk_user)
-VALUES(3, '2024-10-12 10:00:00.000', '2024-10-12 10:05:00.000', 'Westlands Revitalization', 'Seedling', 'A project focused on enhancing public spaces and parks in Westlands.', '800', 3, 1);
+VALUES(3, '2024-10-12 10:00:00.000', '2024-10-12 10:05:00.000', 'Westlands Revitalization', 'Seedling', 'A project focused on enhancing public spaces and parks in Westlands.', 'more_than_5000', 3, 1);
 
 INSERT INTO "_project"
 (id, created_at, updated_at, name, stage, description, size_area, fk_address, fk_user)
-VALUES(4, '2024-10-13 14:30:00.000', '2024-10-13 14:35:00.000', 'Karen Community Garden', 'Irrigation', 'Establishing a community garden to promote local food production in Karen.', '600', 4, 1);
+VALUES(4, '2024-10-13 14:30:00.000', '2024-10-13 14:35:00.000', 'Karen Community Garden', 'Irrigation', 'Establishing a community garden to promote local food production in Karen.', '50_to_100', 4, 1);

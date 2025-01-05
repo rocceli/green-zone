@@ -10,7 +10,7 @@
     
     For further details look at or request greenzone-license.txt for further details.
 
-    Copyright (C) 2024 
+    Copyright (C) 2025 
 
     Email:  elijah.ngugi.gachuki@gmail.com
     Domain: N/A
@@ -19,22 +19,20 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.repository.project;
+package org.greenzone.service.project.edit;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.greenzone.domain.project.Project;
-import org.greenzone.domain.user.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.greenzone.service.project.edit.EditProjectResponse.EditProjectResponseBuilder;
+import org.springframework.http.HttpStatus;
 
 /**
- * @author EN - Dec 27, 2024
+ * @author EN - Jan 5, 2025
  */
-public interface ProjectRepository extends JpaRepository<Project, Long> {
+public interface EditProjectRequestValidator {
 
-    List<Project> findByUserEnabledTrueAndUserActiveTrueAndUserId( Long userId );
-
-
-    Optional<Project> findByIdAndUser( Long projectId, User user );
+    HttpStatus validate(
+            EditProjectResponseBuilder builder,
+            String projectName,
+            String projectDescription,
+            String projectSizeArea,
+            String projectStage );
 }

@@ -22,7 +22,7 @@
 package org.greenzone.service.project.create;
 
 import org.greenzone.service.project.create.CreateProjectResponse.CreateProjectResponseBuilder;
-import org.springframework.http.HttpStatus;;
+import org.springframework.http.HttpStatus;
 
 /**
  * @author EN - Jan 2, 2025

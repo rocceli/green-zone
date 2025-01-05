@@ -27,12 +27,15 @@ import org.greenzone.service.project.ProjectService;
 import org.greenzone.service.project.create.CreateProjectInitialData;
 import org.greenzone.service.project.create.CreateProjectRequest;
 import org.greenzone.service.project.create.CreateProjectResponse;
+import org.greenzone.service.project.edit.EditProjectRequest;
+import org.greenzone.service.project.edit.EditProjectResponse;
 import org.greenzone.service.project.projects.view.ViewProjectsResponse;
 import org.greenzone.service.project.view.ViewProjectResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -82,7 +85,7 @@ public class ProjectController {
     }
 
 
-    @PostMapping( "project/create" )
+    @PostMapping( "/project" )
     @PreAuthorize( "hasAuthority('GROWER' )" )
     public ResponseEntity<CreateProjectResponse> createProject(
             @RequestBody CreateProjectRequest request ) {
@@ -90,6 +93,20 @@ public class ProjectController {
         User user = loggedInCredentialsHelper.getLoggedInUser();
 
         return projectservice.createProject( request, user );
+    }
+
+
+    @PatchMapping( "/project/{projectId}" )
+    @PreAuthorize( "hasAuthority('GROWER' )" )
+    public ResponseEntity<EditProjectResponse> editProject(
+            @RequestBody EditProjectRequest request, @PathVariable Long projectId ) {
+
+        User user = loggedInCredentialsHelper.getLoggedInUser();
+
+        EditProjectResponse editProjectResponse = projectservice.editProject( request, projectId,
+                user );
+
+        return ResponseEntity.status( HttpStatus.OK ).body( editProjectResponse );
     }
 
 

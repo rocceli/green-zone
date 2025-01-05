@@ -40,6 +40,10 @@ import org.greenzone.service.project.create.CreateProjectRequest;
 import org.greenzone.service.project.create.CreateProjectRequestValidator;
 import org.greenzone.service.project.create.CreateProjectResponse;
 import org.greenzone.service.project.create.CreateProjectResponse.CreateProjectResponseBuilder;
+import org.greenzone.service.project.edit.EditProjectRequest;
+import org.greenzone.service.project.edit.EditProjectRequestValidator;
+import org.greenzone.service.project.edit.EditProjectResponse;
+import org.greenzone.service.project.edit.EditProjectResponse.EditProjectResponseBuilder;
 import org.greenzone.service.project.projects.view.ProjectTO;
 import org.greenzone.service.project.projects.view.ViewProjectsResponse;
 import org.greenzone.service.project.view.ViewProjectResponse;
@@ -58,6 +62,7 @@ import lombok.RequiredArgsConstructor;
 public class ProjectServiceImpl implements ProjectService {
 
     private final CreateProjectRequestValidator createProjectRequestValidator;
+    private final EditProjectRequestValidator editProjectRequestValidator;
     private final AddressRepository addressRepository;
     private final CountryRepository countryRepository;
     private final CountryConverter countryConverter;
@@ -217,6 +222,70 @@ public class ProjectServiceImpl implements ProjectService {
 
         }
         return viewProjectResponse;
+    }
+
+
+    @Override
+    public EditProjectResponse editProject( EditProjectRequest request, long id, User user ) {
+
+        Optional<Project> projectOpt = projectRepository.findByIdAndUser( id, user );
+        String projectName = request.getProjectName();
+        String projectSizeArea = request.getProjectSizeArea();
+        String projectDescription = request.getProjectDescription();
+        String projectStage = request.getProjectStage();
+        
+        EditProjectResponseBuilder builder = EditProjectResponse.builder();
+        
+        HttpStatus httpStatus = editProjectRequestValidator.validate(
+            builder, 
+            projectName,
+            projectDescription, 
+            projectSizeArea, 
+            projectStage
+        );
+
+        if ( projectOpt.isEmpty() ) {
+            builder.success( false );
+            return builder.build();
+        }
+
+        EditProjectResponse response = builder.build();
+        if ( !response.getSuccess() ) {
+            return response;
+        }
+
+        Project project = projectOpt.get();
+
+        boolean anyFieldUpdated = false;
+
+        if ( projectName != null ) {
+            project.setName( projectName );
+            anyFieldUpdated = true;
+        }
+
+        if ( projectSizeArea != null ) {
+            project.setSizeArea( projectSizeArea );
+            anyFieldUpdated = true;
+        }
+
+        if ( projectDescription != null ) {
+            project.setDescription( projectDescription );
+            anyFieldUpdated = true;
+        }
+
+        if ( projectStage != null ) {
+            project.setStage( projectStage );
+            anyFieldUpdated = true;
+        }
+
+        if (anyFieldUpdated) {
+            projectRepository.save(project);
+            builder.success( true );
+        } else {
+            builder.success( false );
+        }
+
+        return builder.build();
     }
 
 }
