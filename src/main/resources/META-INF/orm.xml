@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings>xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+    http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+    version="2.1">
+
+    <named-native-query name = "country.getProjectCountsWhereCountGreaterThanZero">
+        <query><![CDATA[ 
+             SELECT 
+                c.id AS countryId,
+                c.name AS countryName,
+                COUNT(u.id) AS projectCount
+            FROM country c
+            LEFT JOIN "_address" a ON c.id = a.fk_country
+            LEFT JOIN "_project" p ON a.id = p.fk_address 
+            LEFT JOIN "_user" u ON p.fk_user = u.id AND u.active = true AND u.enabled = true
+            GROUP BY c.id, c.name
+            HAVING COUNT(u.id) > 0
+            ORDER BY projectCount DESC;
+        ]]></query>
+     </named-native-query>
+</entity-mappings>
