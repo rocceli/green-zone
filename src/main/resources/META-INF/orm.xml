@@ -7,7 +7,7 @@
 
     <named-native-query name = "country.getProjectCountsWhereCountGreaterThanZero">
         <query><![CDATA[ 
-             SELECT 
+            SELECT 
                 c.id AS countryId,
                 c.name AS countryName,
                 COUNT(u.id) AS projectCount

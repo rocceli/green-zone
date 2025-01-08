@@ -10,7 +10,7 @@
     
     For further details look at or request greenzone-license.txt for further details.
 
-    Copyright (C) 2024 
+    Copyright (C) 2025 
 
     Email:  elijah.ngugi.gachuki@gmail.com
     Domain: N/A
@@ -19,20 +19,19 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.repository.location;
+package org.greenzone.repository.project;
 
-import java.util.List;
-
-import org.greenzone.domain.location.Country;
-import org.greenzone.repository.project.CountProjectsByCountryMapper;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 /**
- * @author EN - Dec 20, 2024
+ * @author EN - Jan 8, 2025
  */
-public interface CountryRepository extends JpaRepository<Country, Long> {
+public interface CountProjectsByCountryMapper {
 
-    @Query( name = "country.getProjectCountsWhereCountGreaterThanZero", nativeQuery = true )
-    List<CountProjectsByCountryMapper> getUserProjectsWhereCountGreaterThanZero();
+    Long getCountryId();
+
+
+    String getCountryName();
+
+
+    Long getProjectCount();
 }

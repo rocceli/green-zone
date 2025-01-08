@@ -62,6 +62,7 @@ public class SecurityConfig {
                                 "/api/v1/account/activate/validatecode",
                                 "/api/v1/account/forgottenpassword/requestcode",
                                 "/api/v1/account/forgottenpassword/validate",
+                                "/api/v1/",
                                 "/api/v1/login",
                                 "/api/v1/logout",
                                 "/api/v1/image/avatar/*",

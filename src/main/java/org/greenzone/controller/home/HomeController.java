@@ -19,24 +19,31 @@
     Author : EN
     ================================================================================================
  */
-package org.greenzone.service.home;
+package org.greenzone.controller.home;
 
-import org.greenzone.helper.project.ProjectCountTO;
+import org.greenzone.service.home.HomeInitialData;
+import org.greenzone.service.home.HomeService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 /**
- * @author EN - Jan 6, 2025
+ * @author EN - Jan 8, 2025
  */
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class HomeInitialData {
+@RestController
+@RequestMapping( "/api/v1" )
+@RequiredArgsConstructor
+public class HomeController {
 
-    private Boolean showSponsor;
-    private ProjectCountTO[] projectCountTO;
+    private final HomeService homeService;
+
+    @GetMapping( "/" )
+    public ResponseEntity<HomeInitialData> getHomeInitialData() {
+
+        return homeService.getHomeInitialData();
+
+    }
 }
