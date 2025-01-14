@@ -21,9 +21,14 @@
  */
 package org.greenzone.domain.project;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.greenzone.domain.Domain;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
@@ -47,8 +52,13 @@ import lombok.experimental.SuperBuilder;
 @Table( name = "_post" )
 public class Post extends Domain {
 
-    @Column( name = "is_active", nullable = true, unique = false, length = 32 )
-    private Boolean isActive;
+    @Column( name = "description", nullable = true, unique = false, length = 4096 )
+    private String description;
+
+    @ElementCollection
+    @CollectionTable( name = "post_images", joinColumns = @JoinColumn( name = "post_id" ) )
+    @Column( name = "image_path" )
+    private List<String> imagePaths = new ArrayList<>();
 
     @ManyToOne( )
     @JoinColumn( name = "fk_project",

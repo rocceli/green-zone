@@ -29,6 +29,9 @@ import org.greenzone.service.project.create.CreateProjectRequest;
 import org.greenzone.service.project.create.CreateProjectResponse;
 import org.greenzone.service.project.edit.EditProjectRequest;
 import org.greenzone.service.project.edit.EditProjectResponse;
+import org.greenzone.service.project.post.PostService;
+import org.greenzone.service.project.post.create.CreatePostRequest;
+import org.greenzone.service.project.post.create.CreatePostResponse;
 import org.greenzone.service.project.projects.view.ViewProjectsResponse;
 import org.greenzone.service.project.view.ViewProjectResponse;
 import org.springframework.http.HttpStatus;
@@ -53,6 +56,7 @@ import lombok.RequiredArgsConstructor;
 public class ProjectController {
 
     private final ProjectService projectservice;
+    private final PostService postService;
     private final LoggedInCredentialsHelper loggedInCredentialsHelper;
     
     @GetMapping( "/view/projects" )
@@ -118,5 +122,16 @@ public class ProjectController {
                 .getCreateProjectInitialData();
 
         return ResponseEntity.status( HttpStatus.OK ).body( createProjectInitialData );
+    }
+
+
+    @PostMapping( "{projectId}/post" )
+    @PreAuthorize( "hasAuthority('GROWER' )" )
+    public ResponseEntity<CreatePostResponse> createPost(
+            @RequestBody CreatePostRequest request ) {
+
+        User user = loggedInCredentialsHelper.getLoggedInUser();
+
+        return postService.createPost( request, user );
     }
 }

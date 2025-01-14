@@ -10,7 +10,18 @@ password:
     needs-special-characters: true
     needs-numbers: true
     needs-letters: true
+    
+file:
+  provider: FILE_SYSTEM_FILE_PROVIDER
+  upload-post-dir: /home/artest/projects/java/java spring boot/green-zone/media/post
+  max-image-size: 5242880
 
+aws:
+  s3-endpoint-url: change_me
+  access-key: change_me
+  secret-key: change_me
+  bucket-name: thegreenzonefiles
+  
 first-name:
   validation:
     minimum-length: 2
