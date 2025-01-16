@@ -63,10 +63,11 @@ public class PostServiceImpl implements PostService {
     private String uploadPostDir;
 
     @Override
-    public ResponseEntity<CreatePostResponse> createPost( CreatePostRequest request, User user ) {
+    public ResponseEntity<CreatePostResponse> createPost( CreatePostRequest request, User user,
+            Long projectId ) {
 
         String description = sh.trimAndCapitaliseFirstLetter( request.getPostDescription() );
-        Long projectPostId = request.getPostProjectId();
+        Long projectPostId = projectId;
         MultipartFile[] uploadImages = request.getPostImages();
 
         Long tempId = GenerateId();

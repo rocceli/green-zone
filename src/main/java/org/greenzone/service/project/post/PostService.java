@@ -31,7 +31,8 @@ import org.springframework.http.ResponseEntity;
  */
 public interface PostService {
 
-    ResponseEntity<CreatePostResponse> createPost( CreatePostRequest request, User user );
+    ResponseEntity<CreatePostResponse> createPost( CreatePostRequest request, User user,
+            Long projectId );
 
     //    ViewPostsResponse getViewPostInitialData( User user );
 }

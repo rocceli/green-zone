@@ -128,10 +128,10 @@ public class ProjectController {
     @PostMapping( "{projectId}/post" )
     @PreAuthorize( "hasAuthority('GROWER' )" )
     public ResponseEntity<CreatePostResponse> createPost(
-            @RequestBody CreatePostRequest request ) {
+            @RequestBody CreatePostRequest request, @PathVariable Long projectId ) {
 
         User user = loggedInCredentialsHelper.getLoggedInUser();
 
-        return postService.createPost( request, user );
+        return postService.createPost( request, user, projectId );
     }
 }
