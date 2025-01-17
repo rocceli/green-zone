@@ -33,6 +33,4 @@ public interface PostService {
 
     ResponseEntity<CreatePostResponse> createPost( CreatePostRequest request, User user,
             Long projectId );
-
-    //    ViewPostsResponse getViewPostInitialData( User user );
 }

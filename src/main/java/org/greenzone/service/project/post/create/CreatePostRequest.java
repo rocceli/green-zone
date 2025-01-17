@@ -21,7 +21,7 @@
  */
 package org.greenzone.service.project.post.create;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,6 +38,5 @@ import lombok.NoArgsConstructor;
 public class CreatePostRequest {
 
     private String postDescription;
-    private Long postProjectId;
-    private MultipartFile[] postImages;
+    private List<String> postImages;
 }

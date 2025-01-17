@@ -21,9 +21,10 @@
  */
 package org.greenzone.service.project.post.create;
 
+import java.util.List;
+
 import org.greenzone.service.project.post.create.CreatePostResponse.CreatePostResponseBuilder;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author EN - Jan 14, 2025
@@ -34,6 +35,6 @@ public interface CreatePostRequestValidator {
             CreatePostResponseBuilder builder,
             String postDescription,
             Long postProjectId,
-            MultipartFile[] postImages,
+            List<String> postImages,
             Long countryId );
 }

@@ -21,11 +21,13 @@
  */
 package org.greenzone.service.project.post.create;
 
+import java.util.Base64;
+import java.util.List;
+
 import org.greenzone.service.project.post.create.CreatePostResponse.CreatePostResponseBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
@@ -47,7 +49,7 @@ public class CreatePostRequestValidatorImpl implements CreatePostRequestValidato
 
     @Override
     public HttpStatus validate( CreatePostResponseBuilder builder, String postDescription,
-            Long postProjectId, MultipartFile[] postImages, Long countryId ) {
+            Long postProjectId, List<String> postImages, Long countryId ) {
 
         Boolean hasValidationErrors = Boolean.FALSE;
 
@@ -61,6 +63,7 @@ public class CreatePostRequestValidatorImpl implements CreatePostRequestValidato
         if ( postDescription == null || postDescription
                 .length() < postDescriptionMinimumLength ) {
 
+            System.out.print( postDescription.length() );
             postDescriptionTooShort = Boolean.TRUE;
             hasValidationErrors = Boolean.TRUE;
         }
@@ -73,10 +76,13 @@ public class CreatePostRequestValidatorImpl implements CreatePostRequestValidato
         }
 
         if ( postImages != null ) {
-            for ( MultipartFile image : postImages ) {
-                if ( image.getSize() > maxImageSize ) {
-                    postImageTooBig = Boolean.TRUE;
-                    hasValidationErrors = Boolean.TRUE;
+            for ( String base64Image : postImages ) {
+                String[] parts = base64Image.split( "," );
+                byte[] imageBytes = Base64.getDecoder().decode( parts[1] );
+
+                if ( imageBytes.length > maxImageSize ) {
+                    postImageTooBig = true;
+                    hasValidationErrors = true;
                 }
             }
         }

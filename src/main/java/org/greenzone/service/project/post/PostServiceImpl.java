@@ -22,8 +22,10 @@
 package org.greenzone.service.project.post;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,8 +44,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -63,12 +65,13 @@ public class PostServiceImpl implements PostService {
     private String uploadPostDir;
 
     @Override
+    @Transactional
     public ResponseEntity<CreatePostResponse> createPost( CreatePostRequest request, User user,
             Long projectId ) {
 
         String description = sh.trimAndCapitaliseFirstLetter( request.getPostDescription() );
         Long projectPostId = projectId;
-        MultipartFile[] uploadImages = request.getPostImages();
+        List<String> uploadImages = request.getPostImages();
 
         Long tempId = GenerateId();
 
@@ -85,12 +88,23 @@ public class PostServiceImpl implements PostService {
                 projectPostId, uploadImages, projectPostId );
 
         CreatePostResponse response = builder.build();
+
         if ( !response.getHasValidationErrors() ) {
-            for ( MultipartFile i : uploadImages ) {
+            String uploadPostImageDir = uploadPostDir + File.separator + tempId;
+
+            for ( String base64Image : uploadImages ) {
                 File tempFile = null;
                 try {
-                    tempFile = convertMultipartFileToFile( i );
-                    String uploadPostImageDir = uploadPostDir + File.separator + tempId;
+                    // Decode the Base64 string
+                    String[] parts = base64Image.split( "," );
+                    byte[] imageBytes = Base64.getDecoder().decode( parts[1] );
+
+                    // Create a temporary file
+                    tempFile = File.createTempFile( "upload_", ".tmp" );
+                    try ( FileOutputStream fos = new FileOutputStream( tempFile )) {
+                        fos.write( imageBytes );
+                    }
+
                     String imagePath = fileProvider.saveFile( tempFile, uploadPostImageDir );
                     imagePaths.add( imagePath );
                 }
@@ -105,7 +119,6 @@ public class PostServiceImpl implements PostService {
             }
             Post post = Post.builder()
                     .description( description )
-                    .id( tempId )
                     .project( project )
                     .imagePaths( imagePaths )
                     .build();
@@ -128,15 +141,6 @@ public class PostServiceImpl implements PostService {
             }
         }
         return null;
-    }
-
-    private File convertMultipartFileToFile( MultipartFile multipartFile ) throws IOException {
-
-        File tempFile = File.createTempFile( "temp", multipartFile.getOriginalFilename() );
-
-        multipartFile.transferTo( tempFile );
-
-        return tempFile;
     }
 
 
