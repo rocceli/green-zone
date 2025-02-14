@@ -797,38 +797,6 @@ VALUES ( 239, 'Zambia', 4, current_timestamp, current_timestamp );
 INSERT INTO country ( id, name, fk_continent, created_at, updated_at )
 VALUES ( 240, 'Zimbabwe', 4, current_timestamp, current_timestamp );
 
--- RoleGroup  ======================================================================================
-
-INSERT INTO role_group (id, created_at, updated_at, description, "name")
-VALUES(1, current_timestamp, current_timestamp, 'Roles the Farmer has', 'FARMER');
-
-INSERT INTO role_group (id, created_at, updated_at, description, "name")
-VALUES(2, current_timestamp, current_timestamp, 'Roles the Admin has', 'ADMIN');
-
-INSERT INTO role_group (id, created_at, updated_at, description, "name")
-VALUES(3, current_timestamp, current_timestamp, 'Roles the Super Admin has', 'SUPER_ADMIN');
-
--- Role  ===========================================================================================
-
-INSERT INTO "role" (id, created_at, updated_at, description, "name")
-VALUES(1, current_timestamp, current_timestamp, 'Permission for Farmers', 'FARMER');
-
-INSERT INTO "role" (id, created_at, updated_at, description, "name")
-VALUES(2, current_timestamp, current_timestamp, 'Permission for Admins', 'ADMIN');
-
-INSERT INTO "role" (id, created_at, updated_at, description, "name")
-VALUES(3, current_timestamp, current_timestamp, 'Permission for Super Admins', 'SUPER_ADMIN');
-
---  rolegroup_role =================================================================================
-
-INSERT INTO rolegroup_role (rolegroup_id, role_id)
-VALUES(1, 1);
-
-INSERT INTO rolegroup_role (rolegroup_id, role_id)
-VALUES(2, 2);
-
-INSERT INTO rolegroup_role (rolegroup_id, role_id)
-VALUES(3, 3);
 
 --_user ============================================================================================
 
@@ -852,4 +820,6 @@ VALUES(1, '2024-04-23 13:18:19.696', '2024-04-23 13:18:19.696', false, false,
 INSERT INTO user_role
 (user_id, role_id)
 VALUES(1, 1);
+
+
 

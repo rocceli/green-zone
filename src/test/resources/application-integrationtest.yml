@@ -1,0 +1,161 @@
+password:
+  validation:
+    needs-mixed-case: true
+    minimum-length: 7
+    maximum-length: 21
+    needs-special-characters: true
+    needs-numbers: true
+    needs-letters: true
+    
+file:
+  provider: FILE_SYSTEM_FILE_PROVIDER
+  upload-post-dir: /home/artest/projects/java/java spring boot/green-zone/media/post
+  max-image-size: 5242880
+
+aws:
+  s3-endpoint-url: change_me
+  access-key: change_me
+  secret-key: change_me
+  bucket-name: thegreenzonefiles
+  
+first-name:
+  validation:
+    minimum-length: 2
+    maximum-length: 32
+
+project-description:
+  validation:
+    minimum-length: 7
+    maximum-length: 4096
+
+project-stage:
+  validation:
+    minimum-length: 4
+    maximum-length: 256
+
+project-size-area:
+  validation:
+    minimum-length: 3
+    maximum-length: 256
+
+address-line1:
+  validation:
+    minimum-length: 0
+    maximum-length: 32
+
+address-line2:
+  validation:
+    minimum-length: 0
+    maximum-length: 32
+
+address-town-city:
+  validation:
+    minimum-length: 3
+    maximum-length: 32
+
+address-longitude:
+  validation:
+    minimum-length: 1
+    maximum-length: 128
+
+address-latitude:
+  validation:
+    minimum-length: 1
+    maximum-length: 128
+
+jwt:
+  life-in-milliseconds: 6000000
+
+username:
+  validation:
+    minimum-length: 3
+    maximum-length: 32
+
+last-name:
+  validation:
+    minimum-length: 2
+    maximum-length: 256
+    
+location:
+  name:
+    validation:
+      minimum-length: 2
+      maximum-length: 32
+  instruction:
+    validation:
+      minimum-length: 0
+      maximum-length: 4096
+
+company:
+  email: en@gmail.com
+  address: EN, Nairobi, Kenya
+  website: greenzone.org
+  company: GreenZone
+  phone: +254 (0) 758 921 932
+
+show-sponsor: true
+
+logging:
+  level:
+    org:
+      springframework: DEBUG
+
+superadmin:
+  allow-restart: true
+
+email:
+  disabled: false
+  do-not-reply: no.reply@green-zone.org
+  host: sandbox.smtp.mailtrap.io
+  tls: no
+  ssl: yes
+  port: 587
+  protocol: smtp
+  username: 9abc6f55dcbbca
+  password: af53524090bdbe
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/greenzonedev
+    username: postgres
+    password: eli123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 20  # Optional: for batch insert optimization
+        order_inserts: true
+        order_updates: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+
+  sql:
+    init:
+      data-locations: 
+        - classpath:sql/standing_data.sql
+
+web:
+  server:
+    port: 80
+    protocol: http
+    domain: localhost
+
+---
+# https://www.springcloud.io/post/2022-05/springboot-3-0/#multi-document-yaml
+
+spring:
+    config:
+        activate:
+            on-profile: "en"
